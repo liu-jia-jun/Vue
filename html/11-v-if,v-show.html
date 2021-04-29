@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-if,v-show</title>
+
+    <script src="../lib/vue.js"></script>
+  </head>
+
+  <body>
+    <!-- 
+v-if：通过判断，来决定该元素是否生成或者删除，频繁的使用v-if会大量消耗资源，当元素需要进行频繁的显示隐藏时推荐使用v-show
+
+v-show：通过判断来决定该元素是否显示或者隐藏（通过添加display：none来实现元素的显示与隐藏），使用v-show会消耗初始化时的资源，当元素不需要进行频繁隐藏时使用v-if
+
+
+
+       -->
+    <div id="box">
+      <button @click="change">按钮</button>
+
+      <p v-if="flag">v-for 通过判断，来决定该元素是否生成或者删除</p>
+      <p v-show="flag">v-show 通过判断来决定该元素是否显示或者隐藏</p>
+    </div>
+    <script>
+      new Vue({
+        el: "#box",
+        data: {
+          flag: true,
+        },
+        methods: {
+          // 当vue中methods的方法想要访问vue实例中的数据则要添加this
+
+          change() {
+            this.flag = !this.flag;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

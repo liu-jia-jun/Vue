@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>品牌案例</title>
+    <script src="../lib/vue.js"></script>
+  </head>
+  <!-- 
+
+    delete是vue的关键字所以不能随便使用
+   -->
+  <style>
+    td {
+      padding: 5px;
+      margin: 2px;
+    }
+  </style>
+  <body>
+    <div id="box">
+      id: <input type="text" v-model="userId" /> name:<input
+        type="text"
+        v-model="userName"
+      />
+      <input type="submit" value="添加" @click="add()" />
+
+      <table>
+        <tr v-for="(item,i) in objectlist" :key="item.id">
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td><button @click="del(item.id)" :key="item.id">删除</button></td>
+        </tr>
+      </table>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#box",
+        data: {
+          useId: "",
+          userName: "",
+          objectlist: [
+            { id: 1, name: "张三" },
+            { id: 2, name: "李四" },
+            { id: 3, name: "王五" },
+            { id: 4, name: "赵六" },
+          ],
+        },
+        methods: {
+          /**
+          分析：
+          1.直接从data上获取id和name的值
+
+          2.组织成一个对象，添加到objectList中
+
+          3.将这个对象通过调用数字的相关方法添加到data上的list中
+
+          4.注：在vue中我们需要通过数据的双向绑定(v-model),每当我们修改或添加数据时会自动将最新的数据渲染到页面上
+          */
+          add() {
+            var object = { id: this.userId, name: this.userName };
+            this.objectlist.push(object);
+            this.userId = this.userName = "";
+          },
+          del(i) {
+            var index = this.objectlist.findIndex((item) => {
+              if (item.id - 1 == i) {
+                return true;
+              }
+
+              this.objectlist.splice(index, 1);
+            });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

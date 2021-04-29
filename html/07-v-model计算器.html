@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算器</title>
+    <script src="../lib/vue.js"></script>
+</head>
+<style>
+    input {
+        width: 100px;
+    }
+</style>
+
+<body>
+    <!-- 
+
+        v-model:双向数据绑定，一般用于表单中的数据绑定
+        表单中v-model属性决定vue实例data中相对应的值
+        vue实例中data中的值又决定了v-text，插值表达式，v-htnml中的值
+    
+
+
+     -->
+    <div id="box">
+
+        <p>{{ number1 }}{{ opt }}{{number2}}={{result}}</p>
+        <input type="text" v-model="number1">
+        <select v-model="opt">
+            <option value="+">家</option>
+            <option value="-">剪</option>
+            <option value="*">成</option>
+            <option value="/">锄</option>
+        </select>
+        <input type="text" v-model="number2">
+        <button @click="getresult">=</button>
+        <input type="text" v-model="result">
+    </div>
+    <script>
+        new Vue({
+            el: "#box",
+            data: {
+                number1: 0,
+                number2: 0,
+                result: 0,
+                opt: "家"
+
+            },
+            methods: {
+                getresult() {
+
+
+                    // 正式开发中尽量少用，会出现恶意注入的问题，因为这里是拼接成字符串只有交给浏览器去解析并执行的
+                    this.result = eval("parseInt(this.number1)" + this.opt + "parseInt(this.number2)")
+
+
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

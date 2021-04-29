@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-on</title>
+    <script src="../lib/vue.js"></script>
+</head>
+
+<body>
+
+    <!-- 
+
+    v-on：事件绑定，v-on：事件类型="对应vue实例中的函数名，对应哪个函数名就会执行哪个函数"
+    
+    data进行数据的覆盖和拼接，methods进行事件函数实现
+
+    "v-on:"的简写方式："@"
+    <button id="button" v-on:click="click" @mouseover="mouseover">点击</button>
+
+ -->
+
+    <button id="button" v-on:click="click" @mouseover="mouseover">点击</button>
+    <script>
+        new Vue({
+            el: "#button",
+            data: {
+
+            },
+            methods: {
+                // 函数的两种书写方式，添加function，也可以省略function
+                click() {
+                    alert("click事件");
+                },
+                mouseover: function () {
+                    alert("mouseover事件")
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-band绑定style行内样式</title>
+    <script src="../lib/vue.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        <!-- 不使用v-band属性绑定 -->
+        <p style="color: blue;">这是不使用v-band属性绑定的p标签</p>
+
+        <!-- 
+            使用v-band属性绑定，style行内样式
+            
+            第一种使用方式：传递一个类样式的对象:style="{color:'red','font-wight':'200'}"
+          
+            第二种使用方式：传递一个类样式对象，以对象的形式放在data中，多个以分号隔开
+
+            注：在书写样式时，复式样式需要使用引号引起来
+
+
+        
+        
+        -->
+
+        <p :style="{color:'red','font-wight':'200'}">第一种方式绑定style</p>
+
+        <p :style="styles">第二种方式绑定style</p>
+
+
+
+
+    </div>
+    <script>
+        new Vue({
+            el: "#box",
+            data: {
+
+                styles: { color: 'red', 'font-size': 16 },
+                styles2: { "font-wight": 1000 }
+
+
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>

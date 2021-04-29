@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VueTest</title>
+
+    <!-- vue.js的两种引入方式
+    1.使用外部网站连接无需下载vue.js文件    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+    2.下载vue.js文件之后使用script标签引入  <script src="../lib/vue.js"></script>
+    -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <script src="../lib/vue.js"></script>
+</head>
+
+<body>
+
+
+    <div id="box">
+        <p>{{ msg }}</p>
+
+    </div>
+
+    <script>
+        // 创建一个Vue的实例，当我们导入包时在浏览器的内存中就会存在一个Vue的构造函数
+        var vue = new Vue({
+            //标识当前我们new出来的vue实例控制的是页面上的哪一个区域
+            el: '#box',
+            //data属性中存放的是el所表示的区域中要使用的数据
+            data: {
+                msg: 'hello world'
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
