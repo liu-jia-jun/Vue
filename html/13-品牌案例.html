@@ -109,13 +109,13 @@
           timeFormat(time) {
             var dateTime = new Date(time);
             var y = dateTime.getFullYear();
-            var m = dateTime.getMonth() + 1;
-            var d = dateTime.getDate();
-            var hh = dateTime.getHours();
-            var mm = dateTime.getMinutes();
-            var ss = dateTime.getSeconds();
-            console.log(y);
-            return "" + y + "/" + m + "/" + d;
+            var m = (dateTime.getMonth() + 1).toString().padStart(2, "0");
+            var d = dateTime.getDate().toString().padStart(2, "0");
+            var hh = dateTime.getHours().toString().padStart(2, "0");
+            var mm = dateTime.getMinutes().toString().padStart(2, "0");
+            var ss = dateTime.getSeconds().toString().padStart(2, "0");
+
+            return `${y}/${m}/${d}  ${hh}-${mm}-${ss}`;
           },
         },
       });
