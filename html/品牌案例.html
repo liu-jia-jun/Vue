@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>品牌案例</title>
     <script src="../lib/vue.js"></script>
-    <script src="../lib/node_modules/jquery/dist/jquery.js"></script>
   </head>
   <!-- 
 
@@ -26,6 +25,8 @@
       id: <input type="text" v-model="id" /> name:<input
         type="text"
         v-model="name"
+        @keyup.enter="add()"
+        v-focus
       />
       <input type="submit" value="添加" @click="add()" />
       搜索：<input type="text" v-model="keyword" />
@@ -40,6 +41,17 @@
     </div>
 
     <script>
+      Vue.directive("focus", {
+        bind: function (el) {
+          console.log(el);
+          console.log("开始");
+        },
+        inserted: function (el) {
+          //js原生方法，让el元素获得焦点
+          el.focus();
+        },
+        updated: function () {},
+      });
       var time = new Date();
       new Vue({
         el: "#box",
@@ -67,7 +79,7 @@
           4.注：在vue中我们需要通过数据的双向绑定(v-model),每当我们修改或添加数据时会自动将最新的数据渲染到页面上
           */
           add() {
-            var object = { id: this.id, name: this.name };
+            var object = { id: this.id, name: this.name, time };
             this.objectlist.push(object);
             this.id = this.name = "";
           },

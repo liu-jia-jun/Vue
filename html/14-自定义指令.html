@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+
+使用Vue.directive()定义全局的指令 v-focus
+
+参数1:指令的名称，在定义时，指令的名称前面，不需要添加v-前缀，但是在调用时需要添加v-前缀
+
+参数2:该参数是一个对象，该对象中有与指令相关的三个方法，对应了特定的阶段进行调用
+
+对象方法中传入的第一参数代表了被绑定指定的那个dom元素
+
+bind:当指令绑定到元素上时，就会执行这个bind函数，且只执行一次，  (与样式相关的操作最好写在bind方法中)
+
+inserted:当该元素插入到Dom树中就会执行该方法，且只执行一次       (与行为相关的操作最好写在inserted方法中)
+
+updated:当VNode更新时就会执行updated，可能会触发很多次
+
+
+三个方法中的参数:
+el:指令所绑定的元素对象，可以直接操作Dom
+
+binding:一个对象，包括以下属性
+
+name:指令名，不含v-前缀
+
+value:指令绑定的值
+
+expression:绑定值的字符串形式
+
+       -->
+    <div id="box">
+      <input type="text" v-focus="pink" />
+    </div>
+
+    <script>
+      //定义一个全局的指令
+
+      Vue.directive("focus", {
+        bind: function (el, binding) {
+          el.style.color = binding.expression;
+        },
+        inserted: function (el) {
+          //js原生方法，让el元素获得焦点
+          el.focus();
+        },
+        updated: function () {},
+      });
+      new Vue({
+        el: "#box",
+        data: {},
+        methods: {},
+        filters: {},
+      });
+    </script>
+  </body>
+</html>
