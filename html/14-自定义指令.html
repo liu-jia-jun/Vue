@@ -10,6 +10,8 @@
   <body>
     <!-- 
 
+        指令也是就近原则
+
 使用Vue.directive()定义全局的指令 v-focus
 
 参数1:指令的名称，在定义时，指令的名称前面，不需要添加v-前缀，但是在调用时需要添加v-前缀
@@ -59,6 +61,24 @@ expression:绑定值的字符串形式
         data: {},
         methods: {},
         filters: {},
+        //定义私有指令
+        directives: {
+          focus: {
+            bind: function (el, binding) {
+              el.style.color = binding.expression;
+            },
+            inserted: function (el) {
+              el.focus();
+            },
+            updated: function () {},
+          },
+          /**
+       *   focus: function (el, binding) {
+       * 相当于在bind，inserted，updated三个方法中写了相同的代码块
+                  el.style.color = binding.expression;
+                },
+      */
+        },
       });
     </script>
   </body>
