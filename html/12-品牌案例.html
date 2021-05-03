@@ -6,10 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>品牌案例</title>
     <script src="../lib/vue.js"></script>
+    <script src="../lib/node_modules/jquery/dist/jquery.js"></script>
   </head>
   <!-- 
 
     delete是vue的关键字所以不能随便使用
+
+    关于搜索:之前，v-for中的数据都是从data上的objectList中直接渲染过来的
+            现在，我们定义了应该seach方法将匹配关键字的objectList中的元素，以新数组的方式返回给v-for
    -->
   <style>
     td {
@@ -19,17 +23,17 @@
   </style>
   <body>
     <div id="box">
-      id: <input type="text" v-model="userId" /> name:<input
+      id: <input type="text" v-model="id" /> name:<input
         type="text"
-        v-model="userName"
+        v-model="name"
       />
       <input type="submit" value="添加" @click="add()" />
-
+      搜索：<input type="text" v-model="keyword" />
       <table>
-        <tr v-for="(item,i) in objectlist" :key="item.id">
+        <tr v-for="(item,i) in search(keyword)">
           <td>{{item.id}}</td>
           <td>{{item.name}}</td>
-          <td><button @click="del(item.id)" :key="item.id">删除</button></td>
+          <td><button :key="item.id" @click="del(item.id)">删除</button></td>
         </tr>
       </table>
     </div>
@@ -38,8 +42,9 @@
       new Vue({
         el: "#box",
         data: {
-          useId: "",
-          userName: "",
+          id: "",
+          name: "",
+          keyword: "",
           objectlist: [
             { id: 1, name: "张三" },
             { id: 2, name: "李四" },
@@ -59,18 +64,42 @@
           4.注：在vue中我们需要通过数据的双向绑定(v-model),每当我们修改或添加数据时会自动将最新的数据渲染到页面上
           */
           add() {
-            var object = { id: this.userId, name: this.userName };
+            var object = { id: this.id, name: this.name };
             this.objectlist.push(object);
-            this.userId = this.userName = "";
+            this.id = this.name = "";
           },
           del(i) {
-            var index = this.objectlist.findIndex((item) => {
-              if (item.id - 1 == i) {
-                return true;
+            console.log(i);
+            console.log("+++++++++++++++");
+            var number;
+            this.objectlist.findIndex((item, index) => {
+              console.log(1);
+              if (item.id == i) {
+                number = index;
+                return i;
               }
-
-              this.objectlist.splice(index, 1);
             });
+            console.log(number);
+            this.objectlist.splice(number, 1);
+          },
+          search(keyword) {
+            var newList = [];
+
+            // 注意:forEach  some  filter  findIndex  这些都属于数组新方法
+
+            this.objectlist.filter((element) => {
+              if (element.name.indexOf(keyword) != -1) {
+                newList.push(element);
+              }
+            });
+            /**
+            this.objectlist.forEach((element) => {
+              if (element.name.indexOf(keyword) != -1) {
+                newList.push(element);
+              }
+            });
+            */
+            return newList;
           },
         },
       });
