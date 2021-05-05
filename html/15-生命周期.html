@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>生命周期</title>
+    <script src="../lib/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+
+beforeCreate:这是第一个生命周期函数，在实列完全被创建出来之前，会执行这个函数,在beforeCreate生命周期函数执行时data和methods中的数据均未被初始化
+
+created:这是第二个生命周期函数,实例刚在内存中被创建出来，此时已经初始化好data和methods的数据，但是还没有编译模板
+
+beforeMount:这是第三个生命周期函数，表示模板已经在内存中编辑完成，但是未把模板渲染到页面中,该函数执行之前页面中是之前页面中已经渲染好了的页面(也就是html页面)
+
+mounted:这是第四个生命周期函数，表示内存中的模板已经真实的挂载到页面中，用户可以看到渲染完成的页面,mounted是实例创建期间最后一个生命周期函数，当执行完了mounted就表示该vue实例已经完全被创建好了
+
+beforeUpdate:状态更行之前执行该函数，此时data中的状态值和界面上显示的数据还是旧数据，此时还没有重新渲染Dom节点
+
+updated:实例更新完成之后调用此函数，此时的data中的状态值和界面上显示的数据都已经完成了更新，界面已经被重新渲染好了
+
+beforeDestroy:实例销毁前调用，在这一步实例还能执行
+
+destroyed:vue实例别销毁后调用，调用后vue实例指向的所有东西都会解除绑定，所有的监听事件会被移除，所有的子实例也会被移除
+
+
+-->
+    <div id="box">
+      <p id="p">{{message}}</p>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#box",
+        data: {
+          message: "message",
+        },
+        methods: {
+          show() {
+            console.log("show");
+          },
+        },
+        filters: {},
+        beforeCreate() {
+          // 这是第一个生命周期函数，在实列完全被创建出来之前，会执行这个函数
+          // 在beforeCreate生命周期函数执行时data和methods中的数据均未被初始化
+          console.log(this.message);
+          this.show();
+        },
+        created() {
+          // 这是第二个生命周期函数,实例刚在内存中被创建出来，此时已经初始化好data和methods的数据，但是还没有编译模板
+          console.log(this.message);
+          this.show();
+        },
+        beforeMount() {
+          // 这是第三个生命周期函数，表示模板已经在内存中编辑完成，但是未把模板渲染到页面中
+          // 该函数执行之前页面中是之前页面中已经渲染好了的页面(也就是html页面)
+          console.log(document.getElementById("p").innerText);
+        },
+        mounted() {
+          // 这是第四个生命周期函数，表示内存中的模板已经真实的挂载到页面中，用户可以看到渲染完成的页面
+          // mounted是实例创建期间最后一个生命周期函数，当执行完了mounted就表示该vue实例已经完全被创建好了
+          console.log(document.getElementById("p").innerText);
+        },
+      });
+    </script>
+  </body>
+</html>
