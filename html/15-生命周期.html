@@ -65,6 +65,12 @@ destroyed:vue实例别销毁后调用，调用后vue实例指向的所有东西�
           // mounted是实例创建期间最后一个生命周期函数，当执行完了mounted就表示该vue实例已经完全被创建好了
           console.log(document.getElementById("p").innerText);
         },
+        beforeUpdate() {
+          // 当有数据被改变时才会触发执行这个函数，数据被更新但没有渲染到页面上去，此时页面上还是旧数据
+        },
+        updated() {
+          // updated事件执行之后，页面上的data数据已经保持一致了
+        },
       });
     </script>
   </body>
