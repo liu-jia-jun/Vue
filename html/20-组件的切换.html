@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+  </head>
+  <body>
+    <div id="box">
+      <a href="#" @click.prevent="login">注册</a>
+      <a href="#" @click.prevent="logout">登陆</a>
+      <login v-if="flag"></login>
+      <logout v-else="flag"></logout>
+
+      <template id="login">
+        <div>
+          <h3>login</h3>
+        </div>
+      </template>
+      <template id="logout">
+        <div>
+          <h3>logout</h3>
+        </div>
+      </template>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#box",
+        data: {
+          flag: true,
+        },
+        methods: {
+          login() {
+            this.flag = true;
+          },
+          logout() {
+            this.flag = false;
+          },
+        },
+        filters: {},
+        components: {
+          login: {
+            template: "#login",
+          },
+          logout: {
+            template: "#logout",
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
