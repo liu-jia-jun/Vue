@@ -8,6 +8,15 @@
     <script src="../lib/vue.js"></script>
   </head>
   <body>
+    <!-- 
+
+      组件切换方式一:
+
+      通过一个布尔型的标识结合一个v-if，v-else来决定该组件是否显示
+
+      该方式只能在两个组件中进行切换
+
+     -->
     <div id="box">
       <a href="#" @click.prevent="login">注册</a>
       <a href="#" @click.prevent="logout">登陆</a>
