@@ -8,7 +8,27 @@
     <script src="../lib/vue.js"></script>
   </head>
   <body>
-    <div id="box"></div>
+    <!-- 
+
+
+  在私有组件中也存在data属性，但是与Vue实例不同的是，私有组件中的data属性是通过一个函数返回一个对象来进行存储的
+
+  这样是为了通过函数返回值来将data中的值私有化，避免数据相互污染
+
+
+
+ -->
+
+    <div id="box">
+      <login></login>
+    </div>
+
+    <template id="com1">
+      <div>
+        <h2>这是个私有组件</h2>
+        <h3>{{message}}</h3>
+      </div>
+    </template>
 
     <script>
       // 定义私有组件
@@ -17,7 +37,18 @@
         data: {},
         methods: {},
         filters: {},
-        components: {},
+        components: {
+          // login为私有组件名
+          login: {
+            template: "#com1",
+            // 私有组件中的data
+            data: function () {
+              return {
+                message: "abc",
+              };
+            },
+          },
+        },
       });
     </script>
   </body>
