@@ -8,15 +8,66 @@
     <script src="../lib/vue.js"></script>
   </head>
   <body>
-    <div id="box"></div>
+    <!-- 
 
+父组件向子组件传递方法:
+
+1.在子组件中的元素添加事件，触发事件时可以调用方法，通过在调用的方法中调用 this.$emit("函数名",传参1,传参2 , ...)来调用父组件的方法
+
+2.可以通过 his.parentmessage = data 的方式从子组件中向父组件中传入值，或者该变值
+
+
+
+     -->
+    <div id="box">
+      <com2 @func="show"></com2>
+    </div>
+
+    <template id="temp1">
+      <div>
+        <h1>这是子组件</h1>
+        <input
+          type="button"
+          value="这是子组件中的按钮 -
+        点击它就能触发父组件传递过来的 func方法"
+          @click="myclick"
+        />
+      </div>
+    </template>
     <script>
       new Vue({
         el: "#box",
-        data: {},
-        methods: {},
+        data: {
+          parentmessage: "i am father",
+        },
+        methods: {
+          show(data, data2) {
+            // 可以通过 his.parentmessage = data 的方式从子组件中向父组件中传入值，或者该变值
+
+            console.log("成功调用父组件中的方法" + data + data2);
+            console.log(this.parentmessage);
+            this.parentmessage = data;
+            console.log(this.parentmessage);
+          },
+        },
         filters: {},
-        components: {},
+        components: {
+          com2: {
+            template: "#temp1",
+            data() {
+              return {
+                sonmessage: { name: "小头儿子", age: 6 },
+              };
+            },
+            methods: {
+              myclick() {
+                // 给子组件中的元素添加一个点击事件，当触发这个事件时在其方法内添加 this.$emit("函数名",传参1,传参2 , ...)
+
+                this.$emit("func", this.sonmessage.name, "123");
+              },
+            },
+          },
+        },
       });
     </script>
   </body>
