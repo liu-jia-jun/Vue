@@ -8,15 +8,59 @@
     <script src="../lib/vue.js"></script>
   </head>
   <body>
-    <div id="box"></div>
+    <!-- 
+
+在子组件和父组件之间默认是不能直接访问data数据和methods方法的但是父组件可以向子组件传值，单向的，子组件只能访问，不能修改
+
+ 父组件向子组件传值:
+        1.通过v-bind属性绑定，将父组件中的值绑定给子组件
+        2.此时子组件还不能直接使用这个属性，需要将属性放在props数组中，才能访问
+
+
+
+
+
+
+
+注: 父组件向子组件传递的值只能访问不能修改，修改会报错
+       -->
+    <div id="box">
+      <com1 v-bind:parentmessage="message"></com1>
+    </div>
 
     <script>
       new Vue({
         el: "#box",
-        data: {},
+        data: {
+          message: "这是父组件中的数据",
+        },
         methods: {},
         filters: {},
-        component: {},
+        components: {
+          //经过演示，发现子组件默认无法访问到父组件中的data中的数据和methods中的方法
+
+          com1: {
+            template: `<h1 @click="change">这是子组件-----{{parentmessage}}</h1>`,
+
+            // 子组件中的data数据和methods方式，子组件是可以直接访问和调用的
+
+            data() {
+              return {
+                title: "这是子组件中的数据",
+                content: "这也是子组件中的数据",
+              };
+            },
+
+            // 组件中的所有props属性中的数据都是通过父组件传递给子组件的，props中的数据只能访问，不能修改
+
+            props: ["parentmessage"],
+            methods: {
+              change() {
+                this.parentmessage = "被修改了";
+              },
+            },
+          },
+        },
       });
     </script>
   </body>
