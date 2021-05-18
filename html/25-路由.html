@@ -22,19 +22,66 @@
 
 
 
+路由的基本使用:
+
+1.创建路由实例 -> 通过 new vueRouter({}) 来创建路由实例,  routes属性值为一个数组，
+                      数组中存储若干个对象，每一个对象都对应一个路由匹配规则,
+                      routes的path属性用于监听那个路由链接地址，routes的component属性值为一个模板对象，如果path匹配成功则显示该模板对象
+
+ var routerobj = new VueRouter({
+        routes: [
+        这里的component的值为模板对象的值不是组件名
+
+          { path: "/login", component: login },
+          { path: "/register", component: register },
+        ],
+      });
 
 
 
+  <router-link to="/login">登陆-router</router-link>会渲染成为一个a标签，to表示地址和a标签的href相同，
+
+
+ <router-view></router-view>:该标签相当于一个占位符，当路由规则匹配成功后会将需要显示的模板对象渲染到router-view中去
        -->
-    <div id="box"></div>
+    <div id="box">
+      <a href="#/login">登陆</a>
+      <a href="#/register">注册</a>
 
+      <router-link to="/login">登陆-router</router-link>
+      <router-link to="/register">注册-register</router-link>
+
+      <router-view></router-view>
+    </div>
+    <template id="login">
+      <div>
+        <h3>登陆组件</h3>
+      </div>
+    </template>
+    <template id="register">
+      <div><h3>注册组件</h3></div>
+    </template>
     <script>
+      var login = {
+        template: "#login",
+      };
+      var register = {
+        template: "#register",
+      };
+      var routerobj = new VueRouter({
+        routes: [
+          { path: "/login", component: login },
+          { path: "/register", component: register },
+        ],
+      });
+
       new Vue({
         el: "#box",
         data: {},
         methods: {},
         filters: {},
         components: {},
+        router: routerobj,
       });
     </script>
   </body>
