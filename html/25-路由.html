@@ -32,6 +32,7 @@
         routes: [
         这里的component的值为模板对象的值不是组件名
 
+          { path: "/", redirect: "/login" },
           { path: "/login", component: login },
           { path: "/register", component: register },
         ],
@@ -42,7 +43,11 @@
   <router-link to="/login">登陆-router</router-link>会渲染成为一个a标签，to表示地址和a标签的href相同，
 
 
- <router-view></router-view>:该标签相当于一个占位符，当路由规则匹配成功后会将需要显示的模板对象渲染到router-view中去
+  <router-view></router-view>:该标签相当于一个占位符，当路由规则匹配成功后会将需要显示的模板对象渲染到router-view中去
+
+  redirect:路由转发该path匹配的路由匹配规则转发到redirect的值所指向的地址
+
+
        -->
     <div id="box">
       <a href="#/login">登陆</a>
@@ -70,6 +75,7 @@
       };
       var routerobj = new VueRouter({
         routes: [
+          { path: "/", redirect: "/login" },
           { path: "/login", component: login },
           { path: "/register", component: register },
         ],
