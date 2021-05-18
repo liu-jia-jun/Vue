@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+
+ref引用Dom元素和组件
+
+1.通过给元素和组件添加 ref 属性来标识元素和组件
+
+2.在Vue实例中通过 this.$refs."ref属性值"  这个可以找到相应的元素和组件
+
+3.在Vue实例的方法中通过 this.$refs.com.show() 调用子组件中的方法
+
+4.在Vue实例的方法中通过 this.$refs.com.message 访问子组件中的数据
+
+
+
+
+
+ -->
+
+    <div id="box">
+      <input type="button" value="获取元素" @click="getElement" />
+      <h3 id="myh3" ref="myh3">通过ref引用Dom元素和组件</h3>
+      <com ref="com"></com>
+    </div>
+    <template id="com">
+      <div>
+        <h2>{{message}}</h2>
+      </div>
+    </template>
+    <script>
+      new Vue({
+        el: "#box",
+        data: {},
+        methods: {
+          getElement() {
+            console.log(this.$refs.myh3.innerText);
+            console.log(this.$refs.com.message);
+            this.$refs.com.show();
+          },
+        },
+        filters: {},
+        components: {
+          com: {
+            template: "#com",
+            data() {
+              return {
+                message: "i am a son",
+              };
+            },
+            methods: {
+              show() {
+                console.log("这是子组件中的方法");
+              },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
