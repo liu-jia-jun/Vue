@@ -11,7 +11,7 @@
   <body>
     <!-- 
 
-        通过连接符号来传递参数 eg: <router-link to="/login?id=10&name=刘佳俊">登陆</router-link>
+        通过query形式来传递参数 eg: <router-link to="/login?id=10&name=刘佳俊">登陆</router-link>
                 这种方式是直接在a链接或者router-link标签上用连接符号连接参数名和参数值一一匹配
 
         这种方式传递参数，参数是存储在路由route的query中
@@ -19,7 +19,7 @@
         在模板页面中使用传入的参数的方式:$route.query.id
         在Vue实例中使用传入的参数的方法:this.$route.query.id
 
-
+        这种传参方式，只需要更改to属性值不需要修改path属性
        -->
     <div id="box">
       <router-link to="/login?id=10&name=刘佳俊">登陆</router-link>
