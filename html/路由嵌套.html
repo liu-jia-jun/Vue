@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>路由嵌套实现组件切换</title>
+    <script src="../lib/vue.js"></script>
+    <script src="../lib/vue-router.js"></script>
+  </head>
+  <body>
+    <!-- 
+
+      路由的嵌套:
+
+      1.路由的嵌套的本质就是以父路由为父组件在children属性中添加子路由的相关属性
+
+      2.通过路由嵌套实现组件的切换时,需要像父组件在Vue实例中的写法相同,
+        <router-link to="路由中的path属性值" > 为对应的组件的链接地址
+        <router-view>相当于占位符,对应的组件就显示在该标签中
+
+
+
+  
+ -->
+
+    <div id="box">
+      <router-link to="/account">登录/注册</router-link>
+      <router-view></router-view>
+    </div>
+
+    <template id="temp1">
+      <div>
+        <h1>我是知乎</h1>
+        <router-link to="/account/login">登陆-router</router-link>
+        <router-link to="/account/register">注册-register</router-link>
+
+        <router-view></router-view>
+      </div>
+    </template>
+
+    <template id="login">
+      <div>
+        <h3>登录</h3>
+      </div>
+    </template>
+    <template id="register">
+      <div>
+        <h3>注册</h3>
+      </div>
+    </template>
+
+    <script>
+      var temp1 = Vue.extend({
+        template: "#temp1",
+      });
+
+      var login = Vue.extend({
+        template: "#login",
+      });
+
+      var register = Vue.extend({
+        template: "#register",
+      });
+
+      var routerobj = new VueRouter({
+        routes: [
+          {
+            path: "/account",
+            component: temp1,
+            // 使用children属性实现子路由时,子路由的path前面不要带  "/"  否则永远都会以根路径开始请求，这样不方便用户去理解URL地址
+            children: [
+              { path: "login", component: login },
+              { path: "register", component: register },
+            ],
+          },
+        ],
+      });
+
+      new Vue({
+        el: "#box",
+        data: {},
+        methods: {},
+        filters: {},
+        components: {},
+        router: routerobj,
+      });
+    </script>
+  </body>
+</html>
