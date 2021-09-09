@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>v-bind</title>
     <script src="../lib/vue.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- 
     v-bind:属性绑定（即数据绑定），这里的属性值也可以进行拼接,v-bind里可以写合法的js表达式
     "v-bind:"  也可以简写成  ":"
      <input type="button" :title="mytitle+'123'">
  -->
-    <input type="button" v-bind:title="mytitle+'123'" value="按钮">
+    <input type="button" v-bind:value="mytitle+'123'" />
     <script>
-        new Vue({
-            el: "input",
-            data: {
-                mytitle: "这里的值可以覆盖掉title里面的mytitle"
-            }
-        });
+      new Vue({
+        el: "input",
+        data: {
+          mytitle: "这里的值可以覆盖掉title里面的mytitle",
+        },
+      });
     </script>
-</body>
-
+  </body>
 </html>

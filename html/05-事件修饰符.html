@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>事件修饰符</title>
     <script src="../lib/vue.js"></script>
-</head>
+  </head>
 
-<style>
+  <style>
     #box {
-        width: 200px;
-        height: 200px;
-        background-color: red;
+      width: 200px;
+      height: 200px;
+      background-color: red;
     }
 
     #inner {
-        width: 100px;
-        height: 100px;
-        background-color: blue;
+      width: 100px;
+      height: 100px;
+      background-color: blue;
     }
-</style>
+  </style>
 
-<body>
+  <body>
     <!-- 
 
 stop：阻止冒泡事件
@@ -43,31 +42,26 @@ stop一般用于阻止自身引发的冒泡事件，self一般用于子元素所
      -->
 
     <div id="box" @click.self="out">
-        <div id="inner" @click.stop="inner"></div>
-        <a href="www.baidu.com" @click.prevent.once="baidu">去百度</a>
+      <div id="inner" @click.stop="inner"></div>
+      <a href="https://www.baidu.com" @click.prevent.once="baidu">去百度</a>
     </div>
 
     <script>
-        new Vue({
-            el: "#box",
-            data: {},
-            methods: {
-                out() {
-                    console.log("box");
-
-                },
-                inner() {
-                    console.log("inner");
-                },
-                baidu() {
-                    console.log("go baidu");
-                }
-            }
-        });
+      new Vue({
+        el: "#box",
+        data: {},
+        methods: {
+          out() {
+            console.log("box");
+          },
+          inner() {
+            console.log("inner");
+          },
+          baidu() {
+            console.log("go baidu");
+          },
+        },
+      });
     </script>
-
-
-
-</body>
-
+  </body>
 </html>
