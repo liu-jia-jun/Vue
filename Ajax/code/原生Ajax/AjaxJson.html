@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ajax 响应Json类型的数据</title>
+    <style>
+      #result {
+        width: 200px;
+        height: 100px;
+        border: solid 1px #a51bbe;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="button">点击发送请求</button>
+    <button id="button1">点击取消请求</button>
+    <div id="result"></div>
+
+    <script>
+      //获取 button 和 result 元素
+      const btn = document.getElementById("button");
+      const btn1 = document.getElementById("button1");
+      const result = document.getElementById("result");
+      let xhr = null;
+      let isSending = false;
+      // 点击发送请求
+      btn.onclick = function () {
+        if (isSending) xhr.abort(); //如果正在发送就取消该操作
+
+        // 1.创建对象
+        xhr = new XMLHttpRequest();
+
+        isSending = true;
+
+        // 设置超时回调,如果超过两秒没有请求成功就回调该函数
+        xhr.timeout = 2000;
+        xhr.ontimeout = function () {
+          alert("请求超时");
+        };
+
+        //设置响应体数据的类型
+        xhr.responseType = "json";
+
+        // 2.初始化，设置请求方法和 URL
+        // xhr.open("GET", "http://localhost:8000/service");
+
+        // 传参
+        xhr.open("GET", "http://localhost:8000/service?name=刘佳俊&age=21");
+
+        // 3.发送
+        xhr.send();
+
+        // 4.事件绑定 处理服务端返回的结果
+        // on when 当什么什么的时候
+        // readystate 是 xhr 对象中的属性，表示状态 (0,1,2,3,4)
+        // change 改变
+
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            isSending = false;
+
+            // 判断（服务端返回了所有的结果）
+            if (xhr.status >= 200 && xhr.status < 300) {
+              // 展示原始数据
+              //   console.log(xhr.response);
+              //   result.innerText = xhr.response;
+              //手动对数据转化
+              //   let data = JSON.parse(xhr.response);
+              //   console.log(data);
+              //   result.innerHTML = data.username;
+              // 自动对数据进行JSON格式转化：
+              //设置响应体数据的类型 xhr.responseType = "json";
+              result.innerHTML = xhr.response.username;
+            }
+          }
+        };
+      };
+
+      // 取消发送，通过调用abort()方法来取消请求
+      btn1.onclick = function () {
+        xhr.abort();
+      };
+    </script>
+  </body>
+</html>

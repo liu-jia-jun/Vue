@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+    <script src="../lib/vue-router.js"></script>
+  </head>
+  <style>
+    #row {
+      overflow: hidden;
+      float: left;
+      width: 1100px;
+      margin-left: 30px;
+
+      padding: 0px;
+    }
+    .container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      float: left;
+      margin-right: 15px;
+    }
+    .author {
+      color: #999999;
+      font-size: 10px;
+    }
+    .videoname {
+      font-size: 14px;
+    }
+    .demomessage {
+      color: white;
+      position: absolute;
+      top: 105px;
+      left: 5px;
+      font-size: 8px;
+    }
+    .demomessage span {
+      margin: 3px;
+    }
+    .list {
+      margin-top: 12px;
+      width: 300px;
+      height: 30px;
+
+      font-size: 10px;
+    }
+    #col {
+      float: left;
+    }
+    #logo {
+      text-decoration: dashed;
+    }
+
+    .img {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 30px;
+    }
+  </style>
+  <body>
+    <div id="box">
+      <div id="row">
+        <div id="logo">
+          <img
+            src="../imgs/耳机.png"
+            alt=""
+            width="20px
+          "
+          /><span>音乐</span>
+        </div>
+        <div v-for="item in videoList">
+          <demo v-bind:message="item"></demo>
+        </div>
+      </div>
+
+      <div id="col">
+        <div>排行榜</div>
+        <div v-for="item in videoList">
+          <list v-bind:message="item"></list>
+        </div>
+      </div>
+    </div>
+    <template id="demo">
+      <div class="container">
+        <img src="../imgs/皇冠.png" alt="" v-if="message.isHot" class="img" />
+        <img :src="message.imgUrl" alt="" width="200px" />
+        <div class="demomessage">
+          <span>播放:{{message.play_num}}</span>
+          <span>点赞:{{message.like_num}}</span>
+          <span>时常:{{message.time}}</span>
+        </div>
+        <p class="videoname">{{message.videoName}}</p>
+        <div class="author">
+          <span>UP</span>
+          <span>{{message.author}}</span>
+        </div>
+      </div>
+    </template>
+
+    <template id="list">
+      <div class="list">
+        <span>{{message.id}}</span>
+        <img :src="message.imgUrl" alt="" width="50px" v-if="flag" />
+        <span>{{message.videoName}}</span>
+      </div>
+    </template>
+
+    <script>
+      new Vue({
+        el: "#box",
+        data: {
+          videoList: [
+            {
+              id: 1,
+              isHot: false, // 是否为热门视频
+              imgUrl:
+                "https://i2.hdslb.com/bfs/archive/9e3d09f18014ac39daf7c5d9609e3a3dcd85e48a.jpg", // 视频缩略图
+              videoName: "【萧忆情&伦桑】上弦之月", // 视频名字
+              author: "萧忆情Alex", // 作者名称
+              play_num: 213.1, // 播放量
+              like_num: 2.5, // 点赞数
+              time: "04:12", // 视频时间
+            },
+            {
+              id: 2,
+              isHot: true,
+              imgUrl:
+                "https://i1.hdslb.com/bfs/archive/5dd13d4323f1befee1008cfdc77ebe3919b9d953.jpg",
+              videoName: "徐明浩 THE8 - Side By Side Official Teaser 2",
+              author: "SEVENTEEN",
+              play_num: 2.2,
+              like_num: 32.15,
+              time: "00:19",
+            },
+            {
+              id: 3,
+              isHot: false,
+              imgUrl:
+                "https://i0.hdslb.com/bfs/archive/cc1a119bcd4334ae6edac2500eb96ad64ae1db31.jpg",
+              videoName: "夺冠之作！一首歌让Wiz成功登顶8英里全国总冠军！",
+              author: "地下8英里官方频道",
+              play_num: 27.3,
+              like_num: 1.4,
+              time: "04:09",
+            },
+            {
+              id: 4,
+              isHot: false,
+              imgUrl:
+                "https://i0.hdslb.com/bfs/archive/2c8239af4680d9b75004f8fe8d622cab90fbd3fc.jpg",
+              videoName: "HIMEHINA[流逝的生命]MV",
+              author: "田中姬铃木雏Official",
+              play_num: 18.7,
+              like_num: 2.4,
+              time: "09:28",
+            },
+            {
+              id: 5,
+              isHot: false,
+              imgUrl:
+                "https://i1.hdslb.com/bfs/archive/d4c32a91c7c967d86df194d6f93fdef7f441e368.jpg",
+              videoName: "[东方Project] Bad Apple的5种演奏等级 - 从初学到...",
+              author: "RobLandesMusic",
+              play_num: 29.3,
+              like_num: 2.7,
+              time: "02:14",
+            },
+            {
+              id: 6,
+              isHot: false,
+              imgUrl:
+                "https://i1.hdslb.com/bfs/archive/c3fe46d460bcdde743a91c234c90ba9a42067ca9.jpg",
+              videoName: "Beyond《喜欢你》温柔女生版，你喜欢吗?",
+              author: "刘莉旻",
+              play_num: 5.6,
+              like_num: 2388,
+              time: "01:28",
+            },
+            {
+              id: 7,
+              isHot: false,
+              imgUrl:
+                "https://i1.hdslb.com/bfs/archive/1ea0f28ab6d26ed09d2aa99397cfc95e04fe06c6.jpg",
+              videoName: "用2台计算器弹奏《新世纪福音战士》主题曲",
+              author: "Chaco计算器演奏家",
+              play_num: 23,
+              like_num: 888,
+              time: "03:27",
+            },
+            {
+              id: 8,
+              isHot: true,
+              imgUrl:
+                "https://i2.hdslb.com/bfs/archive/b1d5055a6a7e41e588a1beee19f038e757493b34.jpg",
+              videoName: "日语版《好想爱这个世界啊》翻唱[鹿乃]",
+              author: "鹿乃ちゃん",
+              play_num: 520.6,
+              like_num: 37.7,
+              time: "04:20",
+            },
+            {
+              id: 9,
+              isHot: false,
+              imgUrl:
+                "https://i2.hdslb.com/bfs/archive/0d82064e2259314a335fa79248eefc9c2db54eb1.jpg",
+              videoName: "《奇思妙想喜羊羊》",
+              author: "金子花光",
+              play_num: 14,
+              like_num: 1.2,
+              time: "01:33",
+            },
+            {
+              id: 10,
+              isHot: false,
+              imgUrl:
+                "https://i2.hdslb.com/bfs/archive/0d82064e2259314a335fa79248eefc9c2db54eb1.jpg",
+              videoName: "是七叔呢《踏山河》完整版MV",
+              author: "筝快乐",
+              play_num: 19.7,
+              like_num: 1.1,
+              time: "01:21",
+            },
+          ],
+        },
+        components: {
+          demo: {
+            template: "#demo",
+            data() {
+              return {
+                flag: false,
+              };
+            },
+            props: ["message"],
+          },
+
+          list: {
+            template: "#list",
+            data() {
+              return {
+                flag: false,
+              };
+            },
+            props: ["message"],
+
+            methods: {
+              in() {
+                this.flag = true;
+              },
+              out() {
+                this.flag = false;
+              },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

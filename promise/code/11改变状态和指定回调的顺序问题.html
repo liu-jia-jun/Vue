@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>改变状态和指定回调的顺序问题</title>
+</head>
+
+<body>
+    <script>
+
+        /**
+         * 改变状态和指定回调顺序的问题
+         * 
+         * 当Promise 的执行器中是一个同步任务，即直接执行resovle 函数或reject 函数
+         * 此时是先改变状态后指定回调顺序
+         * 
+         * 当Promise 的执行器中是一个异步任务，即过一段时间执行resovle 函数或reject 函数，如定时器
+         * 此时是先指定回调顺序后改变状态
+         * 
+         * 注意:这里说的是指定回调函数而不是执行回调函数
+         */
+
+        let p = new Promise((resovle, reject) => {
+            // 这里的定时器是异步任务，需要过一秒钟才会执行resovle 函数
+            // 所以会先解析下面的then() 方法此时并没有执行，这个称为指定回调函数
+            // 即先指定回调函数，后改变promise 实例对象的状态
+            setTimeout(() => {
+                resovle("ok")
+            }, 1000)
+        })
+
+        p.then((value) => {
+            console.log(value)
+        }, reason => { })
+
+        let p2 = new Promise((resovle, reject) => {
+            // 这里直接调用resovle 函数，所以这里是同步任务
+            // 这里会先执行resovle 函数后面才会解析then 方法
+            // 即先改变promise 对象实例的状态
+            resovle("ok")
+        })
+
+        p2.then((value) => {
+            console.log(value)
+        }, reason => { })
+
+        // 注意: then() 方法均为改变状态之后才会执行，上述说的是then() 方法中的回调函数的声明指定问题而非执行问题
+
+    </script>
+</body>
+
+</html>

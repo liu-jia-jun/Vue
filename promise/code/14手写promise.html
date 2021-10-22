@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写promise 初级搭建</title>
+    <script src="./14手写promise.js"></script>
+</head>
+
+<body>
+    <script>
+        let p = new Promise((resolve, reject) => {
+
+
+            resolve("a")
+
+
+
+
+        })
+
+
+
+
+        const re = p.then((value) => {
+            throw "出错了"
+        }, () => {
+            console.log("world")
+        }).then(() => {
+            console.log("hello world")
+        }).catch(reason => {
+            console.warn(reason);
+        })
+
+        console.log(re)
+        console.log(p)
+    </script>
+</body>
+
+</html>

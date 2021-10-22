@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>axios中的拦截器</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+</head>
+
+<body>
+
+    <script>
+
+        /**
+         * 请求拦截器链先走到最里面开始往外执行
+         * 响应拦截器链顺序的开始从外往里执行
+         */
+
+
+
+
+        // 设置axios 请求拦截器
+        axios.interceptors.request.use(function (config) {
+            console.log("请求拦截器成功---1号")
+            //此处的config 是axios 传入的config 对象，这里可以进行修改
+            console.log(config)
+            return config
+        }, function (error) {
+            console.log("请求拦截器失败---1号")
+            return Promise.reject(error)
+        })
+
+        axios.interceptors.response.use(function (response) {
+            console.log("响应拦截器成功---1号")
+            return response
+        }, function (error) {
+            console.log("响应拦截器失败---1号")
+            return Promise.reject(error)
+        })
+        axios.interceptors.request.use(function (config) {
+            console.log("请求拦截器成功---2号")
+            //此处的config 是axios 传入的config 对象，这里可以进行修改
+            console.log(config)
+            return config
+        }, function (error) {
+            console.log("请求拦截器失败---2号")
+            return Promise.reject(error)
+        })
+
+        axios.interceptors.response.use(function (response) {
+            console.log("响应拦截器成功---2号")
+            return response
+        }, function (error) {
+            console.log("响应拦截器失败---2号")
+            return Promise.reject(error)
+        })
+
+
+        axios({
+            method: "GET",
+            // 这里的属性值全部都是小写的，大写出错
+            url: "http://localhost:3000/posts"
+        }).then((response) => {
+            console.log("这是自定义回调处理成功的结果")
+            console.log(response)
+
+        })
+
+    </script>
+</body>
+
+</html>

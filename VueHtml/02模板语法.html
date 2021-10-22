@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>初始Vue</title>
+    <script src="../lib/vue.js"></script>
+</head>
+
+<body>
+    <!-- 
+
+  Vue模板语法:
+        1. 插值语法
+            功能: 用于解析标签体中的内容
+            写法: {{xxx}} xxx 是js 表达式，且可以直接读取到data 中的所有属性
+        
+        2. 指令语法
+            功能: 用于解析标签（包括：标签属性，标签内容，绑定事件等等... ）
+            举例: v-bind:href="xxx" 或 简写成为 :href="xxx" xxx 同样需要写成js 表达式
+                    可以直接读取到data 中的所有属性
+            
+            备注: Vue 中有很多指令，不只v-bind 这一种
+    
+
+ -->
+    <div id="root">
+        <h1>插值语法</h1>
+        <h3>hello {{name}}</h3>
+        <hr>
+        <h1>指令语法</h1>
+        <a v-bind:href="school.url">点我</a>
+        <div :up="upperCase.toUpperCase()" :time="Date()"></div>
+        <!-- 这里的值支持js 表达式写法 -->
+
+    </div>
+
+
+
+
+    <script>
+        // 去掉 Vue.js 运行是产生的提示，生产环境建议开启
+        Vue.config.productionTip = false;
+
+        new Vue({
+            el: "#root",
+            data: {
+                name: "world",
+                upperCase: "toup",
+                // data 属性里面的值可以以对象的方式存在 调用时 school.url
+                school: {
+                    url: "https://www.baidu.com",
+                    name: "江软"
+                }
+            }
+        })
+
+
+
+
+    </script>
+</body>
+
+</html>

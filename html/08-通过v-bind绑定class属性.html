@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-band绑定class属性</title>
+    <script src="../lib/vue.js"></script>
+    <style>
+        .size {
+            font-size: 600;
+        }
+
+        .color {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <!-- 不使用v-band属性绑定 -->
+        <p class="size color">这是不使用v-band属性绑定的p标签</p>
+
+        <!-- 
+            使用v-band属性绑定，绑定样式
+            
+            第一种使用方式：传递一个类样式的数组
+
+            第二种使用方式：在传递的数组中使用三元表达式,
+                           在vue实例中创建一个Boolean类型的值，判断boolean的值，之后进行计算  eg：flag1?'color':''
+
+            第三种使用方式：在数组中使用三元表达式，使用对象来替代三元表达式 eg：{'color:flag1'}
+
+            第四种使用方式：将整个class属性的值都作为一个对象来使用，
+                           第一种表现形式是将对象放在class中，
+                           第二种表现形式是将对象放在data中
+
+
+        
+        
+        -->
+
+        <p :class="['size','color']">第一种方式绑定class</p>
+
+        <p :class="['size',flag1?'color':'']">第二种方式绑定class</p>
+
+        <p :class="['size',{'color':flag1}]">第三种方式绑定class</p>
+
+        <p :class="{color:true,size:true}">第四种方式绑定class的第一种表现形式</p>
+
+        <p :class="classes">第四种方式绑定class第二种表现形式</p>
+
+
+
+    </div>
+    <script>
+        new Vue({
+            el: "#box",
+            data: {
+
+                flag1: true,
+                classes: { color: true, size: true }
+
+
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>

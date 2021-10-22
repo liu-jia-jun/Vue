@@ -18,11 +18,7 @@
  -->
 
     <div id="box">
-      <input
-        type="text"
-        @keyup.enter="enter()"
-        :value="message | message1(123)"
-      />
+      <input type="text" @keyup.enter="enter()" />
       {{message}}
     </div>
 
@@ -37,11 +33,7 @@
             this.message = "按键修饰符";
           },
         },
-        filters: {
-          message1(message, data) {
-            return message + data;
-          },
-        },
+        filters: {},
       });
     </script>
   </body>

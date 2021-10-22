@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise 中的then 方法返回的新的promise 对象的状态结果由什么决定</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * Promise 中的then 方法返回的新的promise 对象的状态结果由then 方法中执行的回调函数返回的结果决定
+         * 如果then 方法中执行的回调函数返回结果是成功的那就是成功的，如果失败那就是失败的
+         *
+         */
+        let p = new Promise((resolve, reject) => {
+            resolve("ok")
+        })
+
+        // 执行 then 方法
+        let result = p.then((value) => {
+
+
+            // 第一种返回一个Promise对象,这里回调函数中执行的是resolve 函数所有状态是resolve 值是 success
+            // 如果执行的是reject 函数那么该promise 实例对象的状态是失败的reject 
+            // return new Promise((resolve, reject) => {
+            //     resolve("success")
+            // })
+
+
+            // 第二种,新的promise 对象的状态是resolve 因为所有函数如果没有return 语句默认返回 undefined 所有值是undefined
+            // console.log("success")
+
+
+            // 第三种，新的promise 对象的状态是resolve 
+            //因为没有throw 或者是执行reject 函数所以默认返回的状态是resolve 值是return的 值为521
+            // return 521
+
+            // 第四种 新的promise 对象的状态是reject 且值为 error
+            // throw "error"
+
+
+
+
+
+
+        })
+
+        console.log(result)
+
+    </script>
+</body>
+
+</html>

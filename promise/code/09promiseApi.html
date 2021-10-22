@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promiseApi</title>
+</head>
+
+<body>
+    <a href="https://blog.csdn.net/ligang2585116/article/details/51451499">promise常用API</a>
+    <script>
+
+        /**
+         * 1.promise 的构造函数：Promise(excutor){}
+         * executor函数: 执行器 (resolve , reject)=>{}
+         * resolve函数: 内部定义成功时我们调用的函数 value=>{}
+         * reject函数: 内部定义成功时我们调用的函数 reason=>{}
+         *
+         * 注意: executor会在Promise 内部立即同步调用，异步操作在执行器中执行
+         *
+         * 2.Promise.prototype.then()方法：(onResolved,onRejected)=>{}
+         * (1).onResolve函数：成功的回调函 (value)=>{}
+         * (2).onRejected函数：失败的回调函 (value)=>{}
+         *
+         * 注意: 指定用于得到成功value的成功回调和用于得到失败reason的失败回调，并返回一个新的promise对象
+         *
+         * 
+         * 3.Promise.prototype.catch:(onRejected)=>{}
+         * onRejected函数: 失败的回调函数(reason)={}
+         * 
+         * 4.Promise.resolve(value)=>{}
+         * value:成功的数据或者是Promise对象
+         * 返回一个成或者是失败的数据
+         * 
+         * 
+         * 5.Promise.reject(reason)=>{}
+         * reason：失败的原因
+         * 说明：返回一个失败的promise 对象
+         * 
+         * 6.promise.all(promise)=>{}
+         * 
+         * 参数promise ：包含 n 个promise的数组
+         * 说明：返回一个新的promise 只有所有的promise 都成功才成功，只要有一个失败直接失败
+         * 
+         * 7.Promise.race(promises)=>{}
+         * promises: 包含 n 个promise 的数组
+         * 说明：返回一个新的promise ，第一个完成的promise 的结果状态就是最终的结果状态
+         * 
+         * 
+         * Promise 常用API https://blog.csdn.net/ligang2585116/article/details/51451499
+         * 
+         * 
+         * 
+         */
+
+
+
+        var p = new Promise((resolve, reject) => {
+
+            // 在Promise中执行相应的函数会修改 promise 对象的状态
+            // resolve() 返回成功的函数
+            // reject()  返回失败的函数
+
+            resolve("ok")
+        }
+
+        );
+        console.log(p)
+
+        // const p1 = Promise.prototype.then((resolve, reject) => {
+
+        //     // 在Promise中执行相应的函数会修改 promise 对象的状态
+        //     // resolve() 返回成功的函数
+        //     // reject()  返回失败的函数
+
+        //     resolve("success")
+        // })
+
+
+        const p1 = Promise.resolve("成功")
+
+
+        console.log(p1)
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

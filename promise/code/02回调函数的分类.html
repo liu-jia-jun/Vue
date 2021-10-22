@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>回调函数的分类</title>
+</head>
+
+<body>
+
+    <script>
+        /*
+        1).同步回调：
+            理解：立即执行，执行完全之后才会结束，不会放到回调队列中
+            例子：数组遍历相关的回调函数 / Promise 的 excutor 函数
+        
+        2).异步调用：
+            理解：不会立即执行，会放到回调队列中将来执行
+            例子：定时器回调 / ajax 回调 / Promise 的成功或者失败的回调函数
+        */
+
+        // 同步回调
+        const arr = [1, 3, 5]
+
+        arr.forEach(item => {
+            console.log(item)
+        })
+
+        console.log("foreach()之后")
+
+
+        // 异步回调
+        setTimeout(() => { console.log("timeout callback()") }, 0)
+        console.log("setTimeout()之后")
+    </script>
+</body>
+
+</html>

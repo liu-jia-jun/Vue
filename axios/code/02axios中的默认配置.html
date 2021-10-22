@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>axios的默认配置</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+</head>
+
+<body>
+
+    <button>GET</button>
+    <script>
+
+        var btn = document.querySelector("button")
+
+        axios.defaults.method = "GET"//设置axios 默认的请求方式
+        axios.defaults.baseURL = "http://localhost:3000"// 设置axios 默认的基础URL 和方法中的url 进行拼接得到一个完整的url
+        axios.defaults.timeout = 3000
+
+
+
+        btn.onclick = function () {
+            axios({// 查询
+                method: "GET",
+                url: "/posts/2"
+            }).then(response => {
+                console.log(response.data)
+            })
+        }
+
+
+    </script>
+</body>
+
+</html>

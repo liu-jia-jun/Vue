@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件</title>
+    <script src="../lib/vue.js"></script>
+</head>
+
+<body>
+
+    <!-- 
+
+    Vue中使用组件的三大步骤
+        1. 创建组件
+        2. 注册组件
+        3. 使用组件（通过组件进行在页面上进行引用）
+
+
+    1. 创建组件
+        使用 Vue.extend(options) 创建组件 options 和 创建Vue实例时，传入的options几乎一样，但也有一定的区别
+
+        区别:
+            1. el 不要写 - why: 最终所有的组件都会归一个vm实例进行管理，由vm来决定服务哪个容器
+            2. data 必须写成函数 - why: 避免组件在复用时，数据存在引用关系，为了避免数据污染
+
+            注: 使用template 可以配置组件结构
+        
+    2. 如何注册组件
+        1. 局部注册： 在vue实例中的配置项中配置 components 选项
+        2. 全局注册： 使用Vue.component("组件名",组件) 来进行全局的注册组件
+
+
+    3. 如何使用组件
+        通过组件名标签来引用组件
+        eg: <组件名></组件名>
+
+
+ -->
+
+    <div id="root">
+        <!-- 使用组件 -->
+        <user></user>
+        <school></school>
+    </div>
+
+
+    <!-- 通过template 标签来创建组件中的模板 -->
+    <template id="school">
+        <div>
+            <h2>学校:{{schoolname}}</h2>
+        </div>
+    </template>
+
+    <script>
+
+
+        // 创建组件1
+        const user = Vue.extend({
+            template: `
+        <h2>用户名：{{username}}</h2>
+        `,
+            data() {
+                return {
+                    username: "刘佳俊"
+                }
+            },
+        })
+
+
+        // 创建组件2
+        const school = Vue.extend({
+            template: "#school",
+            data() {
+                return {
+                    schoolname: "江西软件职业技术大学"
+                }
+            },
+        })
+
+        //注册全局组件
+        Vue.component("school", school)
+
+        var vm = new Vue({
+            el: "#root",
+            data: {
+                userinfo: {
+                    username: "张三",
+                    age: 18,
+                    sex: "man"
+                }
+            },
+            components: {
+                // 注册局部组件
+                user: user
+
+            }
+        })
+
+    </script>
+
+</body>
+
+</html>

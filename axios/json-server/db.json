@@ -1,0 +1,22 @@
+{
+  "posts": [
+    {
+      "id": 1
+    },
+    {
+      "title": "江西软件职业技术大学",
+      "author": "刘老师",
+      "id": 2
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

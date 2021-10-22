@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>初始Vue</title>
+    <script src="../lib/vue.js"></script>
+</head>
+
+<body>
+    <!-- 
+        事件的基本使用:
+            1. 使用v-on:xxx 或者 @xxx 绑定事件，其中xxx 为事件名
+            2. 事件的回调需要配置在methods 对象中最终会在vm 上
+            3. methods 中配置的函数，不要使用箭头函数，否则this 就不是vm 了
+            4. methods 中配置的函数，都是被Vue 所管理的函数，this 指向的是vm 或者是组件实例对象
+            5. @click="demo" 和@click="demo($event)" 效果一样都会默认传递事件对象
+            6. @click="demo($event,a,b,c)" 该语法可以传参，排列顺序需要和methods 中函数实现中的形参相对应
+ 
+
+ -->
+    <div id="root">
+        <h1>事件</h1>
+        <button v-on:click="showInfo1">1</button><button @click="showInfo2">2</button>
+
+        <button @click="showInfo3">3</button><button @click="showInfo4(123,$event)">4</button>
+
+    </div>
+
+
+
+
+    <script>
+        // 去掉 Vue.js 运行是产生的提示，生产环境建议开启
+        Vue.config.productionTip = false;
+
+        new Vue({
+            el: "#root",// el 用于指定当前Vue 实例为哪个容器服务，值通常为CSS 选择器字符串,也可以写成这样的能找到即可 document.querySelect("#root")
+            data: { // data 中用于存储数据，数据供el 所指定的容器去使用，值暂时写成一个对象
+                name: "world"
+            },
+            methods: {
+                showInfo1: function () {
+                    alert("v-on 普通写法")
+                },
+                showInfo2: function () {
+                    alert("v-on 简写")
+                },
+                showInfo3: function (event) {
+                    alert("不传参，但是默认会传递一个事件对象来" + event)
+                },
+                showInfo4: function (param, event) {
+                    alert("传参，形参和实参需要一一对应才能正确接收")
+                },
+            }
+        })
+
+
+
+
+    </script>
+</body>
+
+</html>

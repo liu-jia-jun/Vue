@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06promise实例-ajax请求</title>
+</head>
+
+<body>
+    <h2>Promise 封装 AJAX 请求操作</h2>
+    <button id="btn">点击发送ajax请求</button>
+</body>
+<script>
+
+    const btn = document.getElementById("btn")
+
+    // 接口地址 https://api,apiopen.top/getJoke
+
+    const p = new Promise((resolve, reject) => {
+
+        btn.addEventListener("click", function () {
+            // 1.创建对象
+            const xhr = new XMLHttpRequest()
+            // 2.初始化
+            xhr.open("GET", "http://localhost:8000/promise")
+
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        resolve(xhr.response)
+                    } else {
+                        reject(xhr.status)
+                    }
+                }
+            }
+        })
+
+
+
+
+    })
+    p.then((value) => { console.log(value) }, (reason) => { console.log(reason) })
+</script>
+
+</html>

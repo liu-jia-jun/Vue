@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单收集数据</title>
+    <script src="../lib/vue.js"></script>
+</head>
+
+<body>
+    <!-- 
+
+        收集表单数据：
+            若：<input type="text" > ，v-model 收集的是value 值，用户输入的就是value 值
+            若：<input type="radio"> ，v-model 收集的是value 值，需要给标签配置value 值
+            若：<input type="checked"> 
+                如果没有配置 多选框中input中的value值，那么v-model 收集的就是checked （收集的是是否勾选的布尔值）
+                如果配置了input 中的value 中的值，
+                    1. v-model 初始值为非数组， 那么收集的还是checked （收集的是是否勾选的布尔值）
+                    2. v-model 初始值为数组，那么收集的数据就是value组成的数组
+            
+        注意：v-model 有三个修饰符
+                lazy: 当失去焦点时再收集数据
+                number：输入字符串时转为有效的数字
+                trim: 输入的数据过滤掉首位空格
+
+
+
+
+
+
+     -->
+    <div id="root">
+        <form action="">
+            账号：<input type="text" name="" id="" v-model="userinfo.account"><br>
+            密码：<input type="password" v-model="userinfo.password"><br><br>
+            年龄：<input type="number" v-model="userinfo.age"><br>
+            性别：<input type="radio" name="sex" id="" v-model="userinfo.sex" value="man">男<input type="radio" name="sex"
+                id="" v-model="userinfo.sex" value="woman">女<br>
+            爱好：<input type="checkbox" name="hobby" id="" v-model="userinfo.hobby" value="study">学习<input type="checkbox"
+                name="hobby" id="" v-model="userinfo.hobby" value="basketball">篮球<input type="checkbox" name="" id=""
+                v-model="userinfo.hobby" value="sing">唱歌<br>
+            所属校区
+            <select name="" id="" v-model="userinfo.city">
+                <option value=""></option>
+                <option value="江西南昌">江西南昌</option>
+                <option value="北京">北京</option>
+            </select>
+            <textarea name="" id="" cols="30" rows="10" v-model="userinfo.text">
+
+        </textarea>
+            <button @click.prevent="put">提交</button>
+        </form>
+
+    </div>
+
+
+    <script>
+        new Vue({
+            el: "#root",
+            data: {
+                userinfo: {
+                    account: "",
+                    password: "",
+                    age: "",
+                    sex: "",
+                    city: "",
+                    hobby: [],
+                    text: ""
+                }
+            },
+            methods: {
+                put() {
+                    // 转换为json格式
+                    alert(JSON.stringify(this.userinfo))
+                }
+            },
+        })
+    </script>
+
+
+</body>
+
+</html>

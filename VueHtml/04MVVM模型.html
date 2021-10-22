@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>初始Vue</title>
+    <script src="../lib/vue.js"></script>
+</head>
+
+<body>
+    <!-- 
+
+        MVVM 模型:
+            1. M: 模型(Model)  data 中的数据
+            2. V: 视图(View)  模板代码
+            3. VM: 视图模型(ViewModel) 即Vue 实例
+
+        注意:
+            1. data 中所有的属性，最后都出现在vm 身上
+            2. vm 身上所有的属性和Vue 原型上的所有属性在Vue 模板中都可以直接使用
+
+
+ -->
+    <div id="root">
+        <p>{{name}}</p>
+        <p>{{1+1}}</p>
+        <p>test1:{{$options}}</p>
+    </div>
+
+
+
+
+    <script>
+        // 去掉 Vue.js 运行是产生的提示，生产环境建议开启
+        Vue.config.productionTip = false;
+
+        new Vue({
+            el: "#root",// el 用于指定当前Vue 实例为哪个容器服务，值通常为CSS 选择器字符串,也可以写成这样的能找到即可 document.querySelect("#root")
+            data: { // data 中用于存储数据，数据供el 所指定的容器去使用，值暂时写成一个对象
+                name: "刘佳俊",
+
+            }
+        })
+
+
+
+
+    </script>
+</body>
+
+</html>

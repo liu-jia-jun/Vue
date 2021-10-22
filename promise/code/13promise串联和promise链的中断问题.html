@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise串联和promise链的中断问题</title>
+</head>
+
+<body>
+    <script>
+
+        /**
+         * promise 支持链式编程，每一个then 方法都会返回一个新的 promise 对象
+         * 
+         * 异常穿透: 当在promise 链中由异常出现只需要在该链末尾使用catch 来捕获异常即可，会在最后的catch 方法中处理
+         * 
+         * 中断问题
+         * 中断promise 链有且只有一个方法即返回一个pending状态的promise对象
+         * 
+         */
+        let p = new Promise((resolve, reject) => {
+            resolve("ok")
+        })
+
+
+        var result = p.then((value) => {
+            // 在这个回调函数中返回了字符串"success"
+            // 所以这个then 返回的promise 实例对象的原型上的值为success
+
+            return "success"
+        }).then((value) => {
+            // 在这个回调函数中并没有return 语句所以该then 方法返回的promise 对象中的值为undefined
+            console.log("hello promise")
+        }).then((value) => {
+
+            // 返回一个pending状态的promise 就可以中断该promise 链
+            // return new Promise(() => { })
+        }).then((value) => {
+
+            throw "error"
+        }).then((value) => {
+
+            console.log("bbb")
+        }).catch((reason) => {
+            // 异常穿透该promise 链上的异常可以在末尾使用catch来捕获并处理
+            console.warn(reason)
+        })
+        console.log(result)
+    </script>
+</body>
+
+</html>
