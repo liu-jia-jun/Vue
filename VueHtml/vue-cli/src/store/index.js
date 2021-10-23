@@ -9,5 +9,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     actions:{},
     mutations:{},
-    state:{}
+    state:{
+        sum:0
+    }
 })
