@@ -10,15 +10,37 @@ export default new Vuex.Store({
     actions:{
 
         add(context,value){
-            console.log(context,value)
+            
             context.commit("add",value)
-        }
+        },
+        subtract(context,value){
+            context.commit("subtract",value)
+        },
+        addOdd(context,value){
+            context.commit("addOdd",value)
+        },
+        addWait(context,value){
+            context.commit("addWait",value)
+        },
 
     },
     mutations:{
         add(state,value){
-            console.log(state,value)
+            
             state.sum += value
+        },
+        subtract(state,value){
+            state.sum -=value
+        },
+        addOdd(state,value){
+            if(state.sum%2){
+                state.sum += value
+            }
+        },
+        addWait(state,value){
+setTimeout(function(){
+    state.sum += value
+},2000)
         }
     },
     state:{

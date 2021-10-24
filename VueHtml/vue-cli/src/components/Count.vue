@@ -26,13 +26,13 @@ export default {
              this.$store.dispatch("add",this.number)
         },
         decrement(){
-
+            this.$store.dispatch("subtract",this.number)
         },
         incrementOdd(){
-
+ this.$store.dispatch("addOdd",this.number)
         },
         incrementWait(){
-
+ this.$store.dispatch("addWait",this.number)
         },
     },
 
