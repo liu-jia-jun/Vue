@@ -23,7 +23,7 @@ export default {
     },
     methods:{
         increment(){
-             
+             this.$store.dispatch("add",this.number)
         },
         decrement(){
 

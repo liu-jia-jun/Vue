@@ -7,8 +7,20 @@ Vue.use(Vuex)
 
 //  创建并暴露store
 export default new Vuex.Store({
-    actions:{},
-    mutations:{},
+    actions:{
+
+        add(context,value){
+            console.log(context,value)
+            context.commit("add",value)
+        }
+
+    },
+    mutations:{
+        add(state,value){
+            console.log(state,value)
+            state.sum += value
+        }
+    },
     state:{
         sum:0
     }
