@@ -1,8 +1,8 @@
 <template>
   <div>
-    <top />
+    <Top />
     <hr>
-    <context/>
+    <Context/>
   </div>
 </template>
 <script>
